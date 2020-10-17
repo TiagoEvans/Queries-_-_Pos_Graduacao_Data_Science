@@ -1,0 +1,75 @@
+--Exercício 1 - Calcule a MÉDIA da coluna QTD_ITENS da tabela TB_CONSOLIDADO
+SELECT 
+	AVG(QTD_ITENS) MÉDIA
+FROM
+	TB_CONSOLIDADO
+
+--Exercício 2 - Calcule o MÍNIMO da coluna QTD_ITENS da tabela TB_CONSOLIDADO
+SELECT
+	MIN(QTD_ITENS) MÍNIMO
+FROM
+	TB_CONSOLIDADO
+
+--Exercício 3 - Calcule o MÁXIMO da coluna QTD_ITENS da tabela TB_CONSOLIDADO
+SELECT
+	MAX(QTD_ITENS) MÁXIMO
+FROM
+	TB_CONSOLIDADO
+
+--Exercício 4 - Calcule a soma da coluna QTD_ITENS da tabela TB_CONSOLIDADO
+SELECT 
+	SUM(QTD_ITENS) SOMA
+FROM
+	TB_CONSOLIDADO
+
+--Exercício 5 - Calcule a quantidade de passagens da tabela TB_CONSOLIDADO (ID_PASSAGEM)
+SELECT
+	COUNT(ID_PASSAGEM) QTD
+FROM
+	TB_CONSOLIDADO
+
+--Exercício 6 - Calcule a quantidade de prontuários únicos da tabela TB_CONSOLIDADO (PRONTUARIO)
+SELECT
+	COUNT(DISTINCT PRONTUARIO) PRONTUÁRIO
+FROM
+	TB_CONSOLIDADO
+
+SELECT	COUNT (DISTINCT PRONTUARIO) AS Prontuarios_Unicos, 	COUNT(PRONTUARIO) AS TotalProntuariosFROM TB_CONSOLIDADO
+
+--Exercício 7 - Calcule a média de QTD_ITENS por GRUPO_DIAGNOSTICO da tabela TB_CONSOLIDADO
+SELECT
+	GRUPO_DIAGNOSTICO,
+	AVG(QTD_ITENS) QTD,
+	CONVERT(DECIMAL(30,2),AVG(QTD_ITENS)) QTD2
+FROM
+	TB_CONSOLIDADO
+GROUP BY GRUPO_DIAGNOSTICO
+
+--Exercício 8 - Calcule o mínimo de QTD_ITENS por Desc_estadoCivil da tabela TB_CONSOLIDADO
+SELECT
+	Desc_estadoCivil, MIN(QTD_ITENS)
+FROM
+	TB_CONSOLIDADO
+GROUP BY Desc_estadoCivil
+
+--Exercício 9 - Calcule o máximo de QTD_ITENS com acréscimo de 10% da tabela TB_CONSOLIDADO
+SELECT
+	MAX(QTD_ITENS)+((MAX(QTD_ITENS)/100)*10)
+FROM
+	TB_CONSOLIDADO
+
+SELECT
+	MAX(QTD_ITENS) 'TOTAL',
+	MAX(QTD_ITENS)*1.1 'MAIS 10%',
+	MAX(QTD_ITENS)*0.1  '10%'
+FROM
+	TB_CONSOLIDADO
+
+--Exercício 10 - Calcule a soma de QTD_ITENS por Ano de Admissão da tabela TB_CONSOLIDADO, considerar apenas resultados da soma > 160713 
+SELECT
+	YEAR(DATA_ADMISSAO) ANO, SUM(QTD_ITENS) 'QTD ITENS'
+FROM
+	TB_CONSOLIDADO
+GROUP BY YEAR(DATA_ADMISSAO)
+HAVING SUM(QTD_ITENS) > 160713
+ORDER BY SUM(QTD_ITENS)
